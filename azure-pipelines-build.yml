@@ -1,0 +1,30 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - '*'
+pr: none
+
+stages:
+  - stage: BuildAndPublish
+    displayName: Build and publish binary
+    jobs:
+      - job: BuildAndPublishJob
+        displayName: Build and publish binary
+        steps:
+
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: build
+              arguments: --output $(Build.ArtifactStagingDirectory)
+
+          - task: UniversalPackages@0
+            displayName: Publish a Universal Package
+            inputs:
+              command: publish
+              publishDirectory: '$(Build.ArtifactStagingDirectory)'
+              vstsFeedPublish: 'funda'
+              vstsFeedPackagePublish: 'azure-functions-core-tools'
+              packagePublishDescription: 'Modified Funda version of the Azure Functions Core Tools. This is to be able to use the fix in Azure/azure-functions-core-tools#4228 before it is merged'
