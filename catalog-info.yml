@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: azure-functions-core-tools
+  description: |
+    The Azure Functions Core Tools provide a local development experience for creating, developing, testing, running, and debugging Azure Functions.
+  annotations:
+    dev.azure.com/project: 'team platform'
+    dev.azure.com/build-definition: 'azure-functions-core-tools - build'
+    github.com/project-slug: fundarealestate/azure-functions-core-tools
+spec:
+  type: tool
+  owner: team-platform
+  lifecycle: experimental
